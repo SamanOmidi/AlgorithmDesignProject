@@ -20,7 +20,7 @@ int main(){
              << "3. Second Task B\n"
              << "4. Third Task\n"
              << "0. Exit\n";
-        cout << "Enter Your Action: ";
+        cout << "Enter Task: ";
         cin >> action;
         switch(action){
         case 1:

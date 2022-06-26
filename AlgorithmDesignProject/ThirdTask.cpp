@@ -65,19 +65,8 @@ void prim(vector<vector<int>>& graph){
 }
 
 void thirdTask(){
-    /*
-    int n;
-    cin >> n;
 
-    vector<vector<int>> graph(n , vector<int>(n));
-
-    for(int i=0 ; i<n ; i++){
-        for(int j=0 ; j<n ; j++){
-            cin >> graph[i][j];
-        }
-    }
-    */
-
+    //the input is same as secondTaskA
     int m;
     cin >> m;
 
@@ -100,7 +89,6 @@ void thirdTask(){
         vec.push_back(p);
     }
 
-    //int n = 4;
     int n;
     cin >> n;
 
@@ -121,18 +109,6 @@ void thirdTask(){
             graph[vec[i].first.second][vec[i].first.first] = vec[i].second;
         }
     }
-
-    /*
-    for(int i=0 ; i<n ; i++){
-        for(int j=0 ; j<n ; j++){
-            cout << graph[i][j] << ' ';
-        }
-        cout << endl;
-    }
-    */
-
-
-
 
     prim(graph);
 }

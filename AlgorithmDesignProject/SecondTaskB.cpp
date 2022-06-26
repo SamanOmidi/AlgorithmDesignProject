@@ -89,7 +89,7 @@ void mincost(int city , vector<int> completed , vector<vector<int>> new_graph , 
 
 void secondTaskB()
 {
-
+    //the input is same as secondTaskA
     int m;
     cin >> m;
 
@@ -148,15 +148,6 @@ void secondTaskB()
             }
         }
     }
-
-    /*
-    for(int i=0 ; i<new_graph_size ; i++){
-        for(int j=0 ; j<new_graph_size ; j++){
-            cout << new_graph[i][j] << ' ';
-        }
-        cout << endl;
-    }
-    */
 
     vector<int> completed(new_graph_size);
 
