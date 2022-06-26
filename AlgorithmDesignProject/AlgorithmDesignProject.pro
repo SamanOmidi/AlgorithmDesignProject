@@ -4,4 +4,6 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        FirstTask.cpp \
+        SecondTaskA.cpp \
         main.cpp
