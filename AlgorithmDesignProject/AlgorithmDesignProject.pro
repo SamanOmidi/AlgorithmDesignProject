@@ -6,5 +6,6 @@ CONFIG -= qt
 SOURCES += \
         FirstTask.cpp \
         SecondTaskA.cpp \
+        SecondTaskB.cpp \
         ThirdTask.cpp \
         main.cpp

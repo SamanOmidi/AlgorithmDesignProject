@@ -47,10 +47,10 @@ void prim(vector<vector<int>>& graph){
             }
         }
     }
-
+    int cost = 0;
     for(unsigned int i=1 ; i<graph.size() ; i++){
+        cost += graph[i][parent[i]];
         //cout << parent[i] << ' ' << i << endl;
-
         if(i == graph.size() - 1)
             cout << parent[i] << " -> " << i;
         else
@@ -60,9 +60,12 @@ void prim(vector<vector<int>>& graph){
 
     cout << endl;
 
+    cout << "COST: " << cost << endl;
+
 }
 
 void thirdTask(){
+    /*
     int n;
     cin >> n;
 
@@ -73,6 +76,58 @@ void thirdTask(){
             cin >> graph[i][j];
         }
     }
+    */
+
+    int m;
+    cin >> m;
+
+    vector<pair<pair<int,int>,int>> vec;
+
+    for(int i=0 ; i<m ; i++){
+        int u , v , e;
+        cin >> u >> v >> e;
+        //becase its undirected graph we add both
+        // vertex u -> v with weight e
+        pair<pair<int,int>,int> p;
+        pair<int,int> temp(u, v);
+        p.first = temp;
+        p.second = e;
+        vec.push_back(p);
+    }
+
+    //int n = 4;
+    int n;
+    cin >> n;
+
+    vector<vector<int>> graph(n , vector<int>(n));
+
+    for(int i=0 ; i<n ; i++){
+        for(int j=0 ; j<n ; j++){
+            if(i == j)
+                graph[i][j] = 0;
+            else
+                graph[i][j] = INT_MAX;
+        }
+    }
+
+    for(unsigned int i=0 ; i<vec.size() ; i++){
+        if(vec[i].second < graph[vec[i].first.first][vec[i].first.second]){
+            graph[vec[i].first.first][vec[i].first.second] = vec[i].second;
+            graph[vec[i].first.second][vec[i].first.first] = vec[i].second;
+        }
+    }
+
+    /*
+    for(int i=0 ; i<n ; i++){
+        for(int j=0 ; j<n ; j++){
+            cout << graph[i][j] << ' ';
+        }
+        cout << endl;
+    }
+    */
+
+
+
 
     prim(graph);
 }

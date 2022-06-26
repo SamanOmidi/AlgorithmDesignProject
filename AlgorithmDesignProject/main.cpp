@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include "FirstTask.cpp"
 #include "SecondTaskA.cpp"
+#include "SecondTaskB.cpp"
 #include "ThirdTask.cpp"
 
 using namespace std;
@@ -31,6 +32,7 @@ int main(){
             break;
 
         case 3:
+            secondTaskB();
             break;
 
         case 4:

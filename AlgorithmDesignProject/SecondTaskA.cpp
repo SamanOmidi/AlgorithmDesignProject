@@ -58,15 +58,16 @@ void print_paths(vector<vector<set<int>>> next_node, int i , int j){
     if(next_node[i][j].empty()){
         if(i == j){
             string s;
-            if(ans.size() == 1){
-                cout << start << " -> " << ans.top();
-                ans.pop();
+            stack<int> temp = ans;
+            if(temp.size() == 1){
+                cout << start << " -> " << temp.top();
+                temp.pop();
                 cout << endl;
             }
             else{
-                while(!ans.empty()){
-                    s += to_string(ans.top());
-                    ans.pop();
+                while(!temp.empty()){
+                    s += to_string(temp.top());
+                    temp.pop();
                 }
                 reverse(s.begin() , s.end());
                 for(unsigned int k=0 ; k<s.size() ; k++){
@@ -89,6 +90,7 @@ void print_paths(vector<vector<set<int>>> next_node, int i , int j){
         for(auto k : next_node[i][j]){
             ans.push(k);
             print_paths(next_node , k , j);
+            ans.pop();
         }
     }
 }
@@ -104,6 +106,8 @@ void secondTaskA()
     for(int i=0 ; i<m ; i++){
         int u , v , e;
         cin >> u >> v >> e;
+        //becase its undirected graph we add both
+        // vertex u -> v with weight e
         pair<pair<int,int>,int> p;
         pair<int,int> temp(u, v);
         p.first = temp;
