@@ -86,12 +86,17 @@ void thirdTask(){
     for(int i=0 ; i<m ; i++){
         int u , v , e;
         cin >> u >> v >> e;
-        //becase its undirected graph we add both
-        // vertex u -> v with weight e
+
+        //pair u->v + weight e
         pair<pair<int,int>,int> p;
         pair<int,int> temp(u, v);
         p.first = temp;
         p.second = e;
+        //adding this transition
+        vec.push_back(p);
+        //pair v->u + weight e
+        p.first.first = v;
+        p.first.second = u;
         vec.push_back(p);
     }
 

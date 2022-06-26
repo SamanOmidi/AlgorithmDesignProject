@@ -98,41 +98,56 @@ void print_paths(vector<vector<set<int>>> next_node, int i , int j){
 
 void secondTaskA()
 {
+    //number of u v e give to program
     int m;
     cin >> m;
 
     vector<pair<pair<int,int>,int>> vec;
 
+    //enter u(start node) v(end node) e(weight)
     for(int i=0 ; i<m ; i++){
         int u , v , e;
         cin >> u >> v >> e;
-        //becase its undirected graph we add both
-        // vertex u -> v with weight e
+
+        //pair u->v + weight e
         pair<pair<int,int>,int> p;
         pair<int,int> temp(u, v);
         p.first = temp;
         p.second = e;
+        //adding this transition
+        vec.push_back(p);
+        //pair v->u + weight e
+        p.first.first = v;
+        p.first.second = u;
         vec.push_back(p);
     }
 
-    //int n = 4;
+    //enter number of nodes in the graph
     int n;
     cin >> n;
 
+
+    //doing floydwarshall on the graph
+    /*
+     * we have global totalDist variable that saves the all-shortest pairs in
+     * the graph using floydwarshall algorithm
+     *
+     * we also have next_node vector for each node from 0 to n that have a set,
+     * that set shows the path we want to reach to destination
+     * we used set because we want to get all shortest paths possible from start to end
+     */
     vector<vector<set<int>>> next_node = floydWarshall(n , vec);
 
+    //entering start and end node
     int end;
     cin >> start >> end;
+
+    //printing MIN_LENGTH for start -> end using totalDist vector we got from
+    //floydwarshall algorithm
     cout << "MIN LENGTH = " << totalDist[start][end] << endl;
+
+    //printing all possible paths from start -> end
     print_paths(next_node, start, end);
 
-    /*
-    for(int i=0 ; i<n ; i++){
-        for(int j=0 ; j<n ; j++){
-            start = i;
-            print_paths(next_node , start , j);
-        }
-    }
-    */
 }
 

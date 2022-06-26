@@ -34,6 +34,7 @@ void firstTask(){
     col -= 1;
 
     vector<int> moveOrder(m * n);
+
     int moves = 0;
 
     bool check = true;

@@ -21,7 +21,6 @@ vector<vector<int>> floydWarshall2(int n , vector<pair<pair<int,int>,int>> vec)
     for(unsigned int i=0 ; i<vec.size() ; i++){
         if(vec[i].second < cost[vec[i].first.first][vec[i].first.second]){
             cost[vec[i].first.first][vec[i].first.second] = vec[i].second;
-            cost[vec[i].first.second][vec[i].first.first] = vec[i].second;
         }
     }
 
@@ -31,7 +30,6 @@ vector<vector<int>> floydWarshall2(int n , vector<pair<pair<int,int>,int>> vec)
                 int cost_ik_kj = cost[i][k] + cost[k][j];
                 if(cost_ik_kj < cost[i][j]){
                     cost[i][j] = cost_ik_kj;
-                    cost[j][i] = cost_ik_kj;
                 }
             }
         }
@@ -66,25 +64,27 @@ int least(int c , vector<int> completed , vector<vector<int>> new_graph)
     return nc;
 }
 
-void mincost(int city , vector<int> completed , vector<vector<int>> new_graph)
+void mincost(int city , vector<int> completed , vector<vector<int>> new_graph , vector<int> mustVisit)
 {
     int ncity;
 
     completed[city]=1;
 
-    cout<<city+1<<"--->";
+
+    cout << mustVisit[city] << " -> ";
+
     ncity=least(city , completed , new_graph);
 
     if(ncity==999)
     {
         ncity=0;
-        cout<<ncity+1;
+        cout << mustVisit[ncity];
         MIN_COST += new_graph[city][ncity];
 
         return;
     }
 
-    mincost(ncity, completed , new_graph);
+    mincost(ncity, completed , new_graph , mustVisit);
 }
 
 void secondTaskB()
@@ -99,13 +99,16 @@ void secondTaskB()
         int u , v , e;
         cin >> u >> v >> e;
 
+        //pair u->v + weight e
         pair<pair<int,int>,int> p;
-
         pair<int,int> temp(u, v);
         p.first = temp;
-
         p.second = e;
-
+        //adding this transition
+        vec.push_back(p);
+        //pair v->u + weight e
+        p.first.first = v;
+        p.first.second = u;
         vec.push_back(p);
     }
 
@@ -146,17 +149,19 @@ void secondTaskB()
         }
     }
 
+    /*
     for(int i=0 ; i<new_graph_size ; i++){
         for(int j=0 ; j<new_graph_size ; j++){
             cout << new_graph[i][j] << ' ';
         }
         cout << endl;
     }
+    */
 
     vector<int> completed(new_graph_size);
 
     cout<<"\n\nThe Path is:\n";
-    mincost(0 , completed , new_graph); //passing 0 because starting vertex
+    mincost(0 , completed , new_graph , mustVisit);
 
     cout<<"\n\nMinimum cost is "<<MIN_COST << endl;
 
